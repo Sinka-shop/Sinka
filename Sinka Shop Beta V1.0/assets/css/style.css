@@ -1,0 +1,475 @@
+/* Reset and base styles */
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #000000 0%, #1a1a2e 100%) !important;
+  color: #eee !important; /* Light text for dark bg */
+}
+
+.stars, .stars::after, .stars::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Small stars (far) */
+.stars::after {
+  background: 
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent);
+  background-size: 100px 100px;
+  animation: moveStars 100s linear infinite;
+}
+
+/* Medium stars */
+.stars::before {
+  background: 
+    radial-gradient(1.5px 1.5px at 50px 160px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 120px 80px, #fff, transparent);
+  background-size: 200px 200px;
+  animation: moveStars 50s linear infinite;
+}
+
+/* Large stars (close) */
+.stars {
+  background: 
+    radial-gradient(2px 2px at 80px 250px, #fff, transparent),
+    radial-gradient(2px 2px at 300px 150px, #fff, transparent);
+  background-size: 300px 300px;
+  animation: moveStars 30s linear infinite;
+}
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+.stars::after, .stars::before {
+  animation: 
+    moveStars linear infinite,
+    twinkle 3s ease-in-out infinite alternate;
+}
+@keyframes moveStars {
+  to { transform: translateY(-100%); }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  min-height: 100vh;
+  color: #222;
+  text-align: center;
+  background: #fff;
+}
+
+body::before {
+  content: none;
+}
+
+body::after {
+  content: none;
+}
+
+.top-nav .nav-links li a:hover,
+.top-nav .nav-links li a.active {
+  color: #fff;
+  background: #e53935;
+  border-color: #b71c1c;
+  text-shadow: 0 0 16px #e5393555, 0 8px 32px #e5393522;
+  box-shadow: 0 4px 16px #e5393533;
+}
+
+/* Header */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem 0 2.2rem 0;
+  gap: 0.5rem;
+}
+
+header h1 {
+  display: inline-block;
+  border: 3px solid #ffffff;
+  border-radius: 18px;
+  padding: 1.1rem 2.7rem;
+  background: linear-gradient(90deg, #000000 80%, #000000 100%);
+  color: #764ba2;
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 24px #744c9c, 0 1.5px 8px #60407f;
+  margin-bottom: 0.7rem;
+  text-shadow: 0 2px 8px #763daf;
+  transition: box-shadow 0.2s, border-color 0.2s, color 0.2s;
+}
+header h1:hover {
+  box-shadow: 0 0 32px 4px #cfc5c455, 0 8px 32px #e5393522;
+  border-color: #aa9d9d;
+  color: #666363;
+}
+header p {
+  color: #444;
+  font-size: 1.18rem;
+  margin-top: 0.2rem;
+  letter-spacing: 0.5px;
+}
+
+/* Cards Section */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding: 2.5rem 1rem;
+}
+.card {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 2.5px solid #ffffff;
+  border-radius: 16px;
+  width: 270px;
+  min-height: 140px;
+  margin: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.22s cubic-bezier(.4,2,.6,1),
+    box-shadow 0.22s cubic-bezier(.4,2,.6,1),
+    border-color 0.18s;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.card:hover {
+  transform: scale(1.045) translateY(-4px);
+  box-shadow: 0 0 32px 4px #cfc5c455, 0 8px 32px #e5393522;
+  border-color: #aa9d9d;
+}
+
+/* Card Content Layout */
+.card-flex {
+  display: flex;
+  align-items: center;.card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  /* ... */
+}
+  justify-content: flex-start;
+  padding: 1.3rem 1.2rem;
+  gap: 1.2rem;
+  text-align: left;
+  min-width: 0;
+}
+.card-flex img.icon-img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0f0e0e 60%, #080808 100%);
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 2px 12px #444;
+  border: 2px solid #fff;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover .icon-img {
+  box-shadow: 0 0 16px 4px #444;
+  transform: scale(1.08) rotate(-6deg);
+}
+.card-flex .text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.card-flex h2 {
+  margin: 0;
+  font-size: 1.22rem;
+  color: #df0c08; /* Bright red for emphasis */
+  text-shadow: 0 2px 8px #e5393533;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  transition: color 0.2s, text-shadow 0.2s;
+  cursor: pointer;
+}
+.card-flex h2:hover {
+  color: #e7dbdb;
+  text-shadow: 0 0 16px #e5393555, 0 8px 32px #e5393522;
+}
+.card-flex p {
+  margin: 0.5rem 0 0 0;
+  color: #666;
+  font-size: 1.01rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+/* Icon image in followers card (fallback) */
+.icon-img {
+  height: 40px;
+  width: auto;
+}
+
+/* Footer */
+footer {
+  margin-top: 3rem;
+  background: linear-gradient(90deg, #000000 80%, #000000 100%);
+  color: #fff;
+  padding: 2.2rem 1rem;
+  text-align: center;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+footer a {
+  color: #ffeaea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+footer a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+/* Interactive elements: nav links, card titles, and buttons */
+.top-nav .nav-links li a,
+.card-flex h2,
+.card h2,
+button,
+input[type="button"],
+input[type="submit"] {
+  color: #763daf;
+  text-shadow: 0 2px 8px #e5393533;
+  font-weight: 700;
+  transition: color 0.2s, text-shadow 0.2s;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+}
+.top-nav .nav-links li a:hover,
+.card-flex h2:hover,
+.card h2:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+  color: #666363; /* Darker text on hover */
+  text-shadow: 0 0 16px #e5393555, 0 8px 32px #e5393522;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .cards {
+    gap: 1.2rem;
+    padding: 1.2rem 0.5rem;
+  }
+  .card {
+    width: 95vw;
+    min-width: 0;
+    max-width: 350px;
+  }
+  .top-nav .nav-links {
+    gap: 1.2rem;
+  }
+}
+@media (max-width: 600px) {
+  header {
+    margin: 1.5rem 0 1rem 0;
+  }
+  header h1 {
+    font-size: 1.3rem;
+    padding: 0.7rem 1.2rem;
+  }
+  .cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 0.5rem;
+  }
+  .card {
+    width: 98vw;
+    min-width: 0;
+    max-width: 99vw;
+  }
+  .top-nav {
+    padding: 0.7rem 0.5rem;
+  }
+  .top-nav .nav-links {
+    gap: 0.5rem;
+  }
+}
+/* === Navbar haha Menu humberger  Styling === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: rgba(0, 0, 0, 0.92);
+  color: #fff;
+  position: fixed;         /* Fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 120;            /* Above side menu and content */
+  box-shadow: 0 2px 16px #e5393522;
+}
+
+.navbar .home {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.menu-toggle {
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+  color: #763daf;
+  background: #000000;
+  border-radius: 8px;
+  padding: 0.2em 0.6em;
+  border: 2px solid #444;
+  transition: background 0.2s, color 0.2s;
+}
+
+.menu-toggle:hover {
+  background: #e53935;
+  color: #fff;
+}
+
+/* === Side Menu Styling === */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 250px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  padding-top: 80px;
+  transition: right 0.4s ease;
+  box-shadow: -2px 0 16px rgba(117, 48, 47, 0.3);
+  z-index: 130;
+  overflow-y: auto;
+  border-left: 2px solid #271a33;
+}
+
+.side-menu.active {
+  right: 0;
+}
+
+.side-menu a {
+  display: block;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+}
+
+.side-menu a:hover {
+  background-color: #444;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 120;
+  display: none;
+}
+
+.side-menu.active ~ .menu-overlay {
+  display: block;
+}
+
+/* --- Copy Section Styles --- */
+.copy-section {
+    margin: 32px auto 24px auto;
+    max-width: 500px;
+    background: rgba(118, 75, 162, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(102, 126, 234, 0.07);
+    padding: 24px 20px 18px 20px;
+    text-align: center;
+    border: 1px solid #ececec;
+}
+
+.copy-section label {
+    font-weight: 600;
+    color: #884bc4;
+    font-size: 1.08em;
+    letter-spacing: 0.5px;
+}
+
+.copy-section .copy-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+}
+
+.copy-section input[type="text"] {
+    width: 320px;
+    padding: 10px 12px;
+    border-radius: 7px;
+    border: 1.5px solid #b7b2c0;
+    background: #d6d1df;
+    color: #333;
+    font-size: 1em;
+    transition: border 0.2s;
+    outline: none;
+}
+
+.copy-section input[type="text"]:focus {
+    border: 1.5px solid #764ba2;
+    background: #f3eaff;
+}
+
+.copy-section button {
+    padding: 10px 22px;
+    border-radius: 7px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.13);
+    margin-top: 8px;
+    width: 160px;
+}
+
+.copy-section button:hover {
+    background: linear-gradient(90deg, #09020f 0%, #667eea 100%);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+}
+
+.copy-section #copyMsg {
+    display: inline-block;
+    color: #4CAF50;
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s;
+}

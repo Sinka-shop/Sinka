@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>متجر المتابعين</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="stars"></div>
+  <nav class="top-nav">
+    <ul class="nav-links">
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+    </ul>
+  </nav>
+
+  <!-- رأس الصفحة -->
+  <header>
+    <h1>🔥متجر سينكا🔥</h1> 
+    <p>اختر خدمتك 👇 من الأسفل
+    <br>نحن نقدم أفضل الخدمات لك</p>
+  </header>
+  
+  <section>
+    <section class="cards">
+      <!-- بطاقة متابعين إنستغرام -->
+      <div class="card" onclick="goTo('../service/insta.html')">
+        <div class="card-flex">
+          <img class="icon-img" src="../assets/images/instagram.png" alt="شراء متابعين إنستغرام">
+          <div class="text-group">
+            <h2>متابعين إنستغرام</h2>
+            <p>عزز حسابك على إنستغرام</p>
+          </div>
+        </div>
+      </div>
+      <!-- بطاقة متابعين تيك توك -->
+      <div class="card" onclick="goTo('../service/tiktok.html')">
+        <div class="card-flex">
+          <img class="icon-img" src="../assets/images/tiktok.png" alt="شراء متابعين تيك توك"/>
+          <div class="text-group">
+            <h2>متابعين تيك توك</h2>
+            <p>عزز حسابك على تيك توك</p>
+          </div>
+        </div>
+      </div>
+      <!-- بطاقة متابعين X (تويتر) -->
+      <div class="card" onclick="goTo('../service/x.html')">
+        <div class="card-flex">
+          <img class="icon-img" src="../assets/images/twitter.png" alt="شراء متابعين X"/>
+          <div class="text-group">
+            <h2>متابعين X</h2>
+            <p>عزز حسابك على تويتر</p>
+          </div>
+        </div>
+      </div>
+      <!-- قريباً -->
+      <div class="card" onclick="goTo('#')">
+        <div class="card-flex">
+          <img class="icon-img" src="../assets/images/face.ico" alt="قريباً"/>
+          <div class="text-group">
+            <h2>قريباً</h2>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- التذييل -->
+  <footer>
+    <p>تواصل معنا: <a href="mailto:contact@example.com">contact@gmail.com</a></p>
+    <p>تابعنا: 
+      <a href="https://instagram.com" target="_blank">إنستغرام</a> | 
+      <a href="https://facebook.com" target="_blank">فيسبوك</a>
+    </p>
+    <p>&copy; @ 2025 متجر سينكا. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+
+  <!-- شريط التنقل السفلي -->
+  <div class="navbar">
+    <div class="home">🏠 الرئيسية</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="../index.html">🏠 الرئيسية</a>
+    <a href="../pages/diamonds.html">💎 الحصول على الجواهر</a>
+    <a href="../pages/followers.html">📲 شراء متابعين</a>
+    <a href="/direct/share.html">🎁 شارك لتحصل على جائزة مجانية</a>
+  </div>
+</body>
+</html>

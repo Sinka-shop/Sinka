@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>إكمال المشاركات - متجر سينكا</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/share.css">
+    <style>
+      body { direction: rtl; text-align: right; }
+      .navbar, .side-menu { direction: rtl; }
+    </style>
+</head>
+<body> 
+    <div class="stars"></div>
+    <!-- الشريط العلوي -->
+    <nav class="top-nav">
+      <ul class="nav-links">
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+      </ul>
+    </nav>
+     
+    <script src="../assets/js/main.js"></script>
+
+    <div class="navbar">
+      <div class="home">🏠 الرئيسية</div>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </div>
+
+    <div id="sideMenu" class="side-menu">
+      <a href="../index.html">🏠 الرئيسية</a>
+      <a href="../pages/diamonds.html">💎 الحصول على الجواهر</a>
+      <a href="../pages/followers.html">📲 شراء متابعين</a>
+      <a href="share.html">🎁 شارك لتحصل على جائزة مجانية</a>
+    </div>
+
+    <div class="copy-section">
+      <label for="copyText">شارك هذه الرسالة مع أصدقائك:</label>
+      <div class="copy-row">
+          <input id="copyText" type="text" value="جرب متجر سينكا للحصول على جواهر ومتابعين مجاناً! https://yourshop.link" readonly>
+          <button onclick="copyToClipboard()">نسخ</button>
+      </div>
+      <span id="copyMsg" style="display:none;">تم النسخ!</span>
+    </div>
+
+    <div class="shares-container">
+        <h1>🔗 أكمل المشاركات للمتابعة</h1>
+        
+        <div class="progress-section">
+            <h3>تقدم المشاركات</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p><span id="completedShares">0</span>/1 مشاركة مكتملة</p>
+        </div>
+
+        <div class="warning-text">
+            ⚠️ يجب عليك إكمال جميع المشاركات للحصول على الجواهر. يجب أن تبقى كل مشاركة نشطة لمدة 10 ثوانٍ على الأقل.
+        </div>
+
+        <div class="share-links">
+            <a href="https://facebook.com" class="share-link" onclick="return completeShare(1, this);" target="_blank">
+                <div class="share-info">
+                    <img class="icon-img" src="../assets/images/face.ico" alt="أيقونة الجوهرة"/>
+                    <div class="share-text">
+                        <h3>شارك على فيسبوك</h3>
+                        <p>شارك صفحتنا مع أصدقائك</p>
+                    </div>
+                </div>
+                <div class="share-status">⏳</div>
+            </a>
+            <!-- يمكن إضافة روابط مشاركة إضافية هنا -->
+        </div>
+
+        <button class="continue-btn" id="continueBtn" onclick="proceedToProcessing()">
+            المتابعة إلى المعالجة
+        </button>
+    </div>
+
+    <script>
+        let completedShares = 0;
+        let completedShareIds = [];
+        let timeLeft = 300; // 5 دقائق بالثواني
+
+        // بدء مؤقت العد التنازلي
+        const timer = setInterval(() => {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            // إذا أردت عرض المؤقت، أضف عنصرًا بـ id="timer" في الصفحة
+            // document.getElementById('timer').textContent = 
+            //     `الوقت المتبقي: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                alert('انتهى الوقت! يرجى المحاولة مرة أخرى.');
+                window.location.href = 'diamonds.html';
+            }
+        }, 1000);
+
+        function completeShare(shareId, element) {
+            if (completedShareIds.includes(shareId)) {
+                return; // تم إكمالها بالفعل
+            }
+
+            // محاكاة إكمال المشاركة بعد 10 ثوانٍ
+            element.style.opacity = '0.6';
+            element.querySelector('.share-status').textContent = '⏳';
+            
+            setTimeout(() => {
+                completedShareIds.push(shareId);
+                completedShares++;
+                
+                // تحديث الواجهة
+                element.classList.add('completed');
+                element.querySelector('.share-status').textContent = '✅';
+                element.style.opacity = '1';
+                
+                // تحديث التقدم
+                updateProgress();
+                
+                // إظهار رسالة إكمال المشاركة
+                showShareCompleted(shareId);
+                
+            }, 10000); // تأخير 10 ثوانٍ
+        }
+
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const completedSharesSpan = document.getElementById('completedShares');
+            const continueBtn = document.getElementById('continueBtn');
+            
+            const progressPercentage = (completedShares / 1) * 100;
+            progressFill.style.width = progressPercentage + '%';
+            completedSharesSpan.textContent = completedShares;
+            
+            if (completedShares >= 1) {
+                continueBtn.classList.add('active');
+                clearInterval(timer);
+                showAllSharesCompleted();
+            }
+        }
+
+        function showShareCompleted(shareId) {
+            // إشعار مؤقت
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = `تمت مشاركة رقم ${shareId} بنجاح! ✅`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function showAllSharesCompleted() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+                color: white;
+                padding: 30px;
+                border-radius: 20px;
+                z-index: 1000;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            `;
+            notification.innerHTML = `
+                <h2>🎉 تم إكمال جميع المشاركات!</h2>
+                <p>يمكنك الآن المتابعة لمعالجة الجواهر الخاصة بك.</p>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function proceedToProcessing() {
+            if (completedShares >= 1) {
+                window.location.href = 'verify.html';
+            }
+        }
+
+        // إضافة نجوم متحركة
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // وظيفة نسخ النص
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // للأجهزة المحمولة
+            document.execCommand("copy");
+            const copyMsg = document.getElementById("copyMsg");
+            copyMsg.style.display = "inline-block";
+            setTimeout(() => {
+                copyMsg.style.display = "none";
+            }, 2000);
+        }
+    </script>
+
+    <!-- التذييل -->
+    <footer>
+      <p>تواصل معنا: <a href="mailto:contact@example.com">contact@gmail.com</a></p>
+      <p>تابعنا: 
+        <a href="https://instagram.com" target="_blank">إنستغرام</a> | 
+        <a href="https://facebook.com" target="_blank">فيسبوك</a>
+      </p>
+      <p>&copy; @ 2025 متجر سينكا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+</body>
+</html>

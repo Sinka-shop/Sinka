@@ -1,0 +1,86 @@
+<!-- I Will never Make this shit again except css that shit was good ! -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🔥متجر سينكا🔥</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/main.jpg" />
+  <style>
+    body { text-align: right; direction: rtl; }
+    .top-nav ul { flex-direction: row-reverse; }
+    .navbar, .side-menu { direction: rtl; }
+  </style>
+</head>
+<body>
+   <div class="stars"></div>
+  <nav class="top-nav">
+    <ul class="nav-links">
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#"></a></li>
+    </ul>
+  </nav>
+
+  <!-- Header fill <p>future i guess<p> -->
+  <header>
+    <h1>🔥متجر سينكا🔥</h1> 
+    <p>اختر خدمتك 👇 من الأسفل
+    <br>نحن نقدم أفضل الخدمات لك</p>
+  </header>
+
+  <!-- Cards Section -->
+  <section class="cards">
+    <!-- Followers Card -->
+    <div class="card" onclick="goTo('pages/followers.html')">
+      <div class="card-flex">
+        <img class="icon-img" src="assets/images/insta.ico" alt="شراء متابعين">
+        <div class="text-group">
+          <h2>شراء متابعين</h2>
+          <p>عزز حضورك على وسائل التواصل الاجتماعي فوراً</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diamonds Card -->
+    <div class="card" onclick="goTo('pages/diamonds.html')">
+      <div class="card-flex">
+        <img class="icon-img" src="assets/images/diamodns.ico" alt="أيقونة الألماس"/>
+        <div class="text-group">
+          <h2>شراء جواهر فري فاير</h2>
+          <p>احصل على الجواهر مع عروضنا اليومية</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>تواصل معنا: <a href="mailto:contact@example.com">contact@gmail.com</a></p>
+    <p>تابعنا على: 
+      <a href="https://instagram.com" target="_blank">إنستغرام</a> | 
+      <a href="https://facebook.com" target="_blank">فيسبوك</a>
+    </p>
+    <p>&copy; @ 2025 متجر سينكا. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  
+  <!-- Navbar -->
+ <div class="navbar">
+  <div class="home">🏠 الرئيسية</div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+ </div>
+
+ <div id="sideMenu" class="side-menu">
+  <a href="index.html">🏠 الرئيسية</a>
+  <a href="pages/diamonds.html">💎 الحصول على الجواهر</a>
+  <a href="pages/followers.html">📲 شراء متابعين</a>
+  <a href="direct/share.html">🎁 شارك لتحصل على جائزة مجانية</a>
+ </div>
+
+</body>
+</html>

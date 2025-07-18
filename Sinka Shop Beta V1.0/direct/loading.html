@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>جاري المعالجة... - متجر سينكا</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/loading.css">
+</head>
+
+<body>
+  <div class="stars"></div>
+
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <div class="loading-title">جاري معالجة طلبك...</div>
+    <div class="countdown" id="countdown">00:30</div>
+    <div class="info">
+      يرجى الانتظار بينما نقوم بالتحقق من حسابك.<br>
+      الرجاء عدم إغلاق أو تحديث هذه الصفحة.
+    </div>
+  </div>
+  <script>
+    let seconds = 30;
+    const countdownEl = document.getElementById('countdown');
+    function updateCountdown() {
+      const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const sec = String(seconds % 60).padStart(2, '0');
+      countdownEl.textContent = `${min}:${sec}`;
+      if (seconds > 0) {
+        seconds--;
+        setTimeout(updateCountdown, 1000);
+      } else {
+        // Redirect after countdown (change URL as needed)
+        window.location.href = 'done.html';
+      }
+    }
+    updateCountdown();
+  </script>
+  
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="home">🏠 الرئيسية</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  </div>
+
+</body>
+</html>
